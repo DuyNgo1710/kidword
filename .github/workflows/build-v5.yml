@@ -5,6 +5,7 @@ on:
     branches: [ main, master ]
     paths:
       - 'WordPopKidsV5Android.zip'
+      - 'google-services.json'
       - '.github/workflows/build-v5.yml'
   workflow_dispatch:
 
@@ -16,8 +17,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Unzip WordPop Kids v5 project
-        run: unzip -o WordPopKidsV5Android.zip
+      - name: Unzip WordPop Kids v5 project and add Firebase config
+        run: |
+          unzip -o WordPopKidsV5Android.zip
+          cp google-services.json WordPopKidsV5Android/app/google-services.json
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
